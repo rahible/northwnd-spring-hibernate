@@ -95,7 +95,7 @@
     </logger>
     <!-- Limit springs transaction stuff to INFO -->
     <logger name="org.springframework">
-        <level value="ERROR" />
+        <level value="DEBUG" />
     </logger>
     <!-- Limit springs transaction stuff to INFO -->
     <logger name="org.hibernate">

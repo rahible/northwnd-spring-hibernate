@@ -11,7 +11,7 @@
         <property name="categoryName" type="string">
             <column name="CategoryName" length="15" not-null="true" />
         </property>
-        <property name="description" type="clob">
+        <property name="description" type="string">
             <column name="Description" />
         </property>
         <property name="picture" type="blob">

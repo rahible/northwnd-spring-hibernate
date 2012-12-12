@@ -3,7 +3,6 @@ package com.aaronhible.model;
 // Generated Dec 12, 2012 8:51:28 AM by Hibernate Tools 3.2.2.GA
 
 import java.sql.Blob;
-import java.sql.Clob;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,7 +14,7 @@ public class Categories implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private int categoryId;
 	private String categoryName;
-	private Clob description;
+	private String description;
 	private Blob picture;
 	private Set<Products> productses = new HashSet<Products>(0);
 
@@ -27,7 +26,7 @@ public class Categories implements java.io.Serializable {
 		this.categoryName = categoryName;
 	}
 
-	public Categories(int categoryId, String categoryName, Clob description,
+	public Categories(int categoryId, String categoryName, String description,
 			Blob picture, Set<Products> productses) {
 		this.categoryId = categoryId;
 		this.categoryName = categoryName;
@@ -52,11 +51,11 @@ public class Categories implements java.io.Serializable {
 		this.categoryName = categoryName;
 	}
 
-	public Clob getDescription() {
+	public String getDescription() {
 		return this.description;
 	}
 
-	public void setDescription(Clob description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 

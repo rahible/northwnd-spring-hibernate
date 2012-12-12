@@ -3,7 +3,6 @@ package com.aaronhible.model;
 // Generated Dec 12, 2012 8:51:28 AM by Hibernate Tools 3.2.2.GA
 
 import java.sql.Blob;
-import java.sql.Clob;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -33,7 +32,7 @@ public class Employees implements java.io.Serializable {
 	private String homePhone;
 	private String extension;
 	private Blob photo;
-	private Clob notes;
+	private String notes;
 	private String photoPath;
 	private Set<Territories> territorieses = new HashSet<Territories>(0);
 	private Set<Orders> orderses = new HashSet<Orders>(0);
@@ -52,7 +51,7 @@ public class Employees implements java.io.Serializable {
 			String firstName, String title, String titleOfCourtesy,
 			Date birthDate, Date hireDate, String address, String city,
 			String region, String postalCode, String country, String homePhone,
-			String extension, Blob photo, Clob notes, String photoPath,
+			String extension, Blob photo, String notes, String photoPath,
 			Set<Territories> territorieses, Set<Orders> orderses,
 			Set<Employees> employeeses) {
 		this.employeeId = employeeId;
@@ -206,11 +205,11 @@ public class Employees implements java.io.Serializable {
 		this.photo = photo;
 	}
 
-	public Clob getNotes() {
+	public String getNotes() {
 		return this.notes;
 	}
 
-	public void setNotes(Clob notes) {
+	public void setNotes(String notes) {
 		this.notes = notes;
 	}
 

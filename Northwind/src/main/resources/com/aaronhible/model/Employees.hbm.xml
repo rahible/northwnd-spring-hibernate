@@ -53,7 +53,7 @@
         <property name="photo" type="blob">
             <column name="Photo" />
         </property>
-        <property name="notes" type="clob">
+        <property name="notes" type="string">
             <column name="Notes" />
         </property>
         <property name="photoPath" type="string">

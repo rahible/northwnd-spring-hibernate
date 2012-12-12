@@ -38,7 +38,7 @@
         <property name="fax" type="string">
             <column name="Fax" length="24" />
         </property>
-        <property name="homePage" type="clob">
+        <property name="homePage" type="string">
             <column name="HomePage" />
         </property>
         <set name="productses" inverse="true">

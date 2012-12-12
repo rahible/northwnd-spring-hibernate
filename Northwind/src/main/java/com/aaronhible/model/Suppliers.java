@@ -2,7 +2,6 @@ package com.aaronhible.model;
 
 // Generated Dec 12, 2012 8:51:28 AM by Hibernate Tools 3.2.2.GA
 
-import java.sql.Clob;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,7 +25,7 @@ public class Suppliers implements java.io.Serializable {
 	private String country;
 	private String phone;
 	private String fax;
-	private Clob homePage;
+	private String homePage;
 	private Set<Products> productses = new HashSet<Products>(0);
 
 	public Suppliers() {
@@ -40,7 +39,7 @@ public class Suppliers implements java.io.Serializable {
 	public Suppliers(int supplierId, String companyName, String contactName,
 			String contactTitle, String address, String city, String region,
 			String postalCode, String country, String phone, String fax,
-			Clob homePage, Set<Products> productses) {
+			String homePage, Set<Products> productses) {
 		this.supplierId = supplierId;
 		this.companyName = companyName;
 		this.contactName = contactName;
@@ -144,11 +143,11 @@ public class Suppliers implements java.io.Serializable {
 		this.fax = fax;
 	}
 
-	public Clob getHomePage() {
+	public String getHomePage() {
 		return this.homePage;
 	}
 
-	public void setHomePage(Clob homePage) {
+	public void setHomePage(String homePage) {
 		this.homePage = homePage;
 	}
 

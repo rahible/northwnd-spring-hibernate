@@ -2,6 +2,8 @@ package com.aaronhible.dao.hibernate.impl;
 
 // Generated Dec 12, 2012 8:51:31 AM by Hibernate Tools 3.2.2.GA
 
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -169,5 +171,37 @@ public class CategoriesDaoImpl extends AbstractHibernateSessionFactoryDao
 			log.error("find by example failed", re);
 			throw re;
 		}
+	}
+
+	@Override
+	@SuppressWarnings(value = "unchecked")
+	public List<Categories> findAll() {
+		log.debug("finding all Categories");
+		try {
+			List<Categories> results = getSessionFactory().getCurrentSession()
+					.createCriteria("com.aaronhible.model.Categories").list();
+			log.debug("find all successful, result size: " + results.size());
+			return results;
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+
+	}
+
+	public byte[] findPicture(int id) {
+		Categories category = this.findById(id);
+		if (category == null)
+			return null;
+		try {
+			Blob blob = category.getPicture();
+			long length = blob.length();
+			if (length == 0)
+				return null;
+			return blob.getBytes(1, (int) length);
+		} catch (SQLException sql) {
+			throw new RuntimeException(sql);
+		}
+
 	}
 }

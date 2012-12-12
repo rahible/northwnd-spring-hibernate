@@ -19,5 +19,9 @@ public interface CategoriesDao {
 	public abstract Categories findById(int id);
 
 	public abstract List<Categories> findByExample(Categories instance);
+	
+	public abstract List<Categories> findAll();
+	
+	public abstract byte[] findPicture(int id);
 
 }

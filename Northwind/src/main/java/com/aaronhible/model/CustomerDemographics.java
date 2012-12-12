@@ -2,7 +2,6 @@ package com.aaronhible.model;
 
 // Generated Dec 12, 2012 8:51:28 AM by Hibernate Tools 3.2.2.GA
 
-import java.sql.Clob;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,7 +12,7 @@ public class CustomerDemographics implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String customerTypeId;
-	private Clob customerDesc;
+	private String customerDesc;
 	private Set<Customers> customerses = new HashSet<Customers>(0);
 
 	public CustomerDemographics() {
@@ -23,7 +22,7 @@ public class CustomerDemographics implements java.io.Serializable {
 		this.customerTypeId = customerTypeId;
 	}
 
-	public CustomerDemographics(String customerTypeId, Clob customerDesc,
+	public CustomerDemographics(String customerTypeId, String customerDesc,
 			Set<Customers> customerses) {
 		this.customerTypeId = customerTypeId;
 		this.customerDesc = customerDesc;
@@ -38,11 +37,11 @@ public class CustomerDemographics implements java.io.Serializable {
 		this.customerTypeId = customerTypeId;
 	}
 
-	public Clob getCustomerDesc() {
+	public String getCustomerDesc() {
 		return this.customerDesc;
 	}
 
-	public void setCustomerDesc(Clob customerDesc) {
+	public void setCustomerDesc(String customerDesc) {
 		this.customerDesc = customerDesc;
 	}
 
@@ -86,5 +85,5 @@ public class CustomerDemographics implements java.io.Serializable {
 				+ ", customerDesc=" + customerDesc + ", customerses="
 				+ customerses + "]";
 	}
-	
+
 }

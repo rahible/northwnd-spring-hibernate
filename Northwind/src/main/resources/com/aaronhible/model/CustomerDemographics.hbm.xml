@@ -8,7 +8,7 @@
             <column name="CustomerTypeID" length="10" />
             <generator class="assigned" />
         </id>
-        <property name="customerDesc" type="clob">
+        <property name="customerDesc" type="string">
             <column name="CustomerDesc" />
         </property>
         <set name="customerses" inverse="true" table="CustomerCustomerDemo">

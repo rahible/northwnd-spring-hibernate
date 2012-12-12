@@ -3,6 +3,8 @@
     <wb-module deploy-name="Northwind">
         <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/classes"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <property name="context-root" value="/Northwind"/>
         <property name="java-output-path" value="/Northwind/src/main/webapp/WEB-INF/classes"/>
     </wb-module>
