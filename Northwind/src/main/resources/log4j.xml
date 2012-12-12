@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  Log4j Configuration                                                  -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+<!-- $Id: log4j.xml,v 1.19 2005/06/16 21:29:47 n1129584 Exp $ -->
+<!--
+    | For more configuration infromation and examples see the Jakarta Log4j
+    | owebsite: http://jakarta.apache.org/log4j
+-->
+<log4j:configuration
+    xmlns:log4j="http://jakarta.apache.org/log4j/"
+    debug="false">
+    <!-- ============================== -->
+    <!-- Append messages to the console -->
+    <!-- ============================== -->
+    <appender
+        name="CONSOLE"
+        class="org.apache.log4j.ConsoleAppender">
+        <param
+            name="Target"
+            value="System.out" />
+        <param
+            name="Threshold"
+            value="DEBUG" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <!-- The default pattern: Date Priority [Category] Message\n -->
+            <param
+                name="ConversionPattern"
+                value="[%d] %t %c{1} %-5p - %m%n" />
+        </layout>
+    </appender>
+    <!--  <appender
+        name="FILE"
+        class="org.apache.log4j.RollingFileAppender">
+        <param
+            name="File"
+            value="../logs/northwind.log" />
+        <param
+            name="Threshold"
+            value="DEBUG" />
+        <param
+            name="MaxFileSize"
+            value="1000KB" />
+        <param
+            name="MaxBackupIndex"
+            value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param
+                name="ConversionPattern"
+                value="[%d] %t %c{1} %-5p - %m%n" />
+        </layout>
+    </appender>
+     <appender
+        name="INDEXER-LOG"
+        class="org.apache.log4j.RollingFileAppender">
+        <param
+            name="File"
+            value="../logs/downselect-indexer.log" />
+        <param
+            name="Threshold"
+            value="DEBUG" />
+        <param
+            name="MaxFileSize"
+            value="1000KB" />
+        <param
+            name="MaxBackupIndex"
+            value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param
+                name="ConversionPattern"
+                value="[%d] %t %c{1} %-5p - %m%n" />
+        </layout>
+    </appender>
+ -->    
+    <!-- ================ -->
+    <!-- Limit categories -->
+    <!-- ================ -->
+    <logger name="com.aaronhible">
+        <level value="DEBUG" />
+    </logger>
+    <!-- httpclient.wire.header set to DEBUG turns on httpclient header messages -->
+    <logger name="httpclient.wire.header">
+        <level value="FATAL" />
+    </logger>
+    <!-- httpclient.wire.content set to DEBUG turns ON content received -->
+    <logger name="httpclient.wire.content">
+        <level value="FATAL" />
+    </logger>
+    <!-- Limit the org.apache.commons logger to INFO as its FATAL is verbose -->
+    <logger name="org.apache.commons">
+        <level value="ERROR" />
+    </logger>
+    <!-- Limit springs transaction stuff to INFO -->
+    <logger name="org.springframework">
+        <level value="ERROR" />
+    </logger>
+    <!-- Limit springs transaction stuff to INFO -->
+    <logger name="org.hibernate">
+        <level value="ERROR" />
+    </logger>
+    <!-- ======================= -->
+    <!-- Setup the Root logger -->
+    <!-- ======================= -->
+    <root>
+        <appender-ref ref="CONSOLE" />
+        <!-- <appender-ref ref="FILE" />  -->
+    </root>
+</log4j:configuration>
