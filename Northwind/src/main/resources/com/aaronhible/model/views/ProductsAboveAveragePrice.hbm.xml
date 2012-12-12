@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 12, 2012 8:51:30 AM by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="com.aaronhible.model.ProductsAboveAveragePrice" table="`Products Above Average Price`" catalog="NORTHWND">
+        <composite-id name="id" class="com.aaronhible.model.ProductsAboveAveragePriceId">
+            <key-property name="productName" type="string">
+                <column name="ProductName" length="40" />
+            </key-property>
+            <key-property name="unitPrice" type="big_decimal">
+                <column name="UnitPrice" scale="4" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

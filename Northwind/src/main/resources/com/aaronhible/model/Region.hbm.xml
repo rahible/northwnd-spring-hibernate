@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 12, 2012 8:51:30 AM by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="com.aaronhible.model.Region" table="Region" catalog="NORTHWND">
+        <id name="regionId" type="int">
+            <column name="RegionID" />
+            <generator class="assigned" />
+        </id>
+        <property name="regionDescription" type="string">
+            <column name="RegionDescription" length="50" not-null="true" />
+        </property>
+        <set name="territorieses" inverse="true">
+            <key>
+                <column name="RegionID" not-null="true" />
+            </key>
+            <one-to-many class="com.aaronhible.model.Territories" />
+        </set>
+    </class>
+</hibernate-mapping>

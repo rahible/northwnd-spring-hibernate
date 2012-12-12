@@ -13,7 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-	<build>
+<!-- <build>
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -35,7 +35,7 @@
 								</component>
 							</components>
 							<componentProperties>
-								<packagename>com.aaronhible</packagename>
+								<packagename>com.aaronhible.model</packagename>
 							</componentProperties>
 						</configuration>
 					</execution>
@@ -54,7 +54,7 @@
 								</component>
 							</components>
 							<componentProperties>
-								<packagename>com.aaronhible</packagename>
+								<packagename>com.aaronhible.model</packagename>
 							</componentProperties>
 						</configuration>
 					</execution>
@@ -73,7 +73,7 @@
 								</component>
 							</components>
 							<componentProperties>
-								<packagename>package.name</packagename>
+								<packagename>com.aaronhible.model</packagename>
 								<configurationfile>target/hibernate3/generated-mappings/hibernate.cfg.xml</configurationfile>
 							</componentProperties>
 						</configuration>
@@ -93,7 +93,7 @@
 								</component>
 							</components>
 							<componentProperties>
-								<packagename>package.name</packagename>
+								<packagename>com.aaronhible.dao.hibernate</packagename>
 								<configurationfile>target/hibernate3/generated-mappings/hibernate.cfg.xml</configurationfile>
 							</componentProperties>
 						</configuration>
@@ -109,6 +109,7 @@
 			</plugin>
 		</plugins>
 	</build>
+ -->		
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 12, 2012 8:51:30 AM by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="com.aaronhible.model.Orders" table="Orders" catalog="NORTHWND">
+        <id name="orderId" type="int">
+            <column name="OrderID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="employees" class="com.aaronhible.model.Employees" fetch="select">
+            <column name="EmployeeID" />
+        </many-to-one>
+        <many-to-one name="customers" class="com.aaronhible.model.Customers" fetch="select">
+            <column name="CustomerID" length="5" />
+        </many-to-one>
+        <many-to-one name="shippers" class="com.aaronhible.model.Shippers" fetch="select">
+            <column name="ShipVia" />
+        </many-to-one>
+        <property name="orderDate" type="timestamp">
+            <column name="OrderDate" length="23" />
+        </property>
+        <property name="requiredDate" type="timestamp">
+            <column name="RequiredDate" length="23" />
+        </property>
+        <property name="shippedDate" type="timestamp">
+            <column name="ShippedDate" length="23" />
+        </property>
+        <property name="freight" type="big_decimal">
+            <column name="Freight" scale="4" />
+        </property>
+        <property name="shipName" type="string">
+            <column name="ShipName" length="40" />
+        </property>
+        <property name="shipAddress" type="string">
+            <column name="ShipAddress" length="60" />
+        </property>
+        <property name="shipCity" type="string">
+            <column name="ShipCity" length="15" />
+        </property>
+        <property name="shipRegion" type="string">
+            <column name="ShipRegion" length="15" />
+        </property>
+        <property name="shipPostalCode" type="string">
+            <column name="ShipPostalCode" length="10" />
+        </property>
+        <property name="shipCountry" type="string">
+            <column name="ShipCountry" length="15" />
+        </property>
+    </class>
+</hibernate-mapping>
