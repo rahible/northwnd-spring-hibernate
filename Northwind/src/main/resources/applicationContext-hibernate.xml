@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+		<property name="dataSource" ref="dataSource" />
+		<!--  <property 
+			name=" mappingResources "> <list> <value>com/aaronhible/model/Employees.hbm.xml</value> 
+			<value>com/aaronhible/model/Region.hbm.xml</value> <value>com/aaronhible/model/Categories.hbm.xml</value> 
+			<value>com/aaronhible/model/OrderDetails.hbm.xml</value> <value>com/aaronhible/model/Orders.hbm.xml</value> 
+			<value>com/aaronhible/model/Products.hbm.xml</value> <value>com/aaronhible/model/Sysdiagrams.hbm.xml</value> 
+			<value>com/aaronhible/model/Shippers.hbm.xml</value> <value>com/aaronhible/model/Suppliers.hbm.xml</value> 
+			<value>com/aaronhible/model/Customers.hbm.xml</value> <value>com/aaronhible/model/Territories.hbm.xml</value> 
+			<value>com/aaronhible/model/CustomerDemographics.hbm.xml</value> </list> 
+			</property> <property name="hibernateProperties"> <value>${hibernate.dialect}</value> 
+			</property> -->
+	</bean>
+</beans>

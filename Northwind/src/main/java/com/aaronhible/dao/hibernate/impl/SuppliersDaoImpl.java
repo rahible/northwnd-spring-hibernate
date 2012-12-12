@@ -4,12 +4,9 @@ package com.aaronhible.dao.hibernate.impl;
 
 import java.util.List;
 
-import javax.naming.InitialContext;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
 import com.aaronhible.dao.SuppliersDao;
@@ -21,22 +18,9 @@ import com.aaronhible.model.Suppliers;
  * @see com.aaronhible.model.Suppliers
  * @author Hibernate Tools
  */
-public class SuppliersDaoImpl implements SuppliersDao {
+public class SuppliersDaoImpl extends AbstractHibernateSessionFactoryDao implements SuppliersDao {
 
 	private static final Log log = LogFactory.getLog(SuppliersDaoImpl.class);
-
-	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
 
 	/* (non-Javadoc)
 	 * @see com.aaronhible.dao.hibernate.impl.SuppliersDao#persist(com.aaronhible.model.Suppliers)
@@ -45,7 +29,7 @@ public class SuppliersDaoImpl implements SuppliersDao {
 	public void persist(Suppliers transientInstance) {
 		log.debug("persisting Suppliers instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			getSessionFactory().getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -60,7 +44,7 @@ public class SuppliersDaoImpl implements SuppliersDao {
 	public void attachDirty(Suppliers instance) {
 		log.debug("attaching dirty Suppliers instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			getSessionFactory().getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -75,7 +59,7 @@ public class SuppliersDaoImpl implements SuppliersDao {
 	public void attachClean(Suppliers instance) {
 		log.debug("attaching clean Suppliers instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			getSessionFactory().getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -90,7 +74,7 @@ public class SuppliersDaoImpl implements SuppliersDao {
 	public void delete(Suppliers persistentInstance) {
 		log.debug("deleting Suppliers instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			getSessionFactory().getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -105,7 +89,7 @@ public class SuppliersDaoImpl implements SuppliersDao {
 	public Suppliers merge(Suppliers detachedInstance) {
 		log.debug("merging Suppliers instance");
 		try {
-			Suppliers result = (Suppliers) sessionFactory.getCurrentSession()
+			Suppliers result = (Suppliers) getSessionFactory().getCurrentSession()
 					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -122,7 +106,7 @@ public class SuppliersDaoImpl implements SuppliersDao {
 	public Suppliers findById(int id) {
 		log.debug("getting Suppliers instance with id: " + id);
 		try {
-			Suppliers instance = (Suppliers) sessionFactory.getCurrentSession()
+			Suppliers instance = (Suppliers) getSessionFactory().getCurrentSession()
 					.get("com.aaronhible.model.Suppliers", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
@@ -144,7 +128,7 @@ public class SuppliersDaoImpl implements SuppliersDao {
 	public List<Suppliers> findByExample(Suppliers instance) {
 		log.debug("finding Suppliers instance by example");
 		try {
-			List<Suppliers> results = sessionFactory.getCurrentSession()
+			List<Suppliers> results = getSessionFactory().getCurrentSession()
 					.createCriteria("com.aaronhible.model.Suppliers")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "

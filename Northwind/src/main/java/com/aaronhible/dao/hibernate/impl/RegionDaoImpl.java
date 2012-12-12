@@ -4,12 +4,9 @@ package com.aaronhible.dao.hibernate.impl;
 
 import java.util.List;
 
-import javax.naming.InitialContext;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
 import com.aaronhible.dao.RegionDao;
@@ -21,22 +18,9 @@ import com.aaronhible.model.Region;
  * @see com.aaronhible.model.Region
  * @author Hibernate Tools
  */
-public class RegionDaoImpl implements RegionDao {
+public class RegionDaoImpl extends AbstractHibernateSessionFactoryDao implements RegionDao {
 
 	private static final Log log = LogFactory.getLog(RegionDaoImpl.class);
-
-	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
 
 	/* (non-Javadoc)
 	 * @see com.aaronhible.model.RegionDao#persist(com.aaronhible.model.Region)
@@ -45,7 +29,7 @@ public class RegionDaoImpl implements RegionDao {
 	public void persist(Region transientInstance) {
 		log.debug("persisting Region instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			getSessionFactory().getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -60,7 +44,7 @@ public class RegionDaoImpl implements RegionDao {
 	public void attachDirty(Region instance) {
 		log.debug("attaching dirty Region instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			getSessionFactory().getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -75,7 +59,7 @@ public class RegionDaoImpl implements RegionDao {
 	public void attachClean(Region instance) {
 		log.debug("attaching clean Region instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			getSessionFactory().getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -90,7 +74,7 @@ public class RegionDaoImpl implements RegionDao {
 	public void delete(Region persistentInstance) {
 		log.debug("deleting Region instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			getSessionFactory().getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -105,7 +89,7 @@ public class RegionDaoImpl implements RegionDao {
 	public Region merge(Region detachedInstance) {
 		log.debug("merging Region instance");
 		try {
-			Region result = (Region) sessionFactory.getCurrentSession().merge(
+			Region result = (Region) getSessionFactory().getCurrentSession().merge(
 					detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -122,7 +106,7 @@ public class RegionDaoImpl implements RegionDao {
 	public Region findById(int id) {
 		log.debug("getting Region instance with id: " + id);
 		try {
-			Region instance = (Region) sessionFactory.getCurrentSession().get(
+			Region instance = (Region) getSessionFactory().getCurrentSession().get(
 					"com.aaronhible.model.Region", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
@@ -144,7 +128,7 @@ public class RegionDaoImpl implements RegionDao {
 	public List<Region> findByExample(Region instance) {
 		log.debug("finding Region instance by example");
 		try {
-			List<Region> results = sessionFactory.getCurrentSession()
+			List<Region> results = getSessionFactory().getCurrentSession()
 					.createCriteria("com.aaronhible.model.Region")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "

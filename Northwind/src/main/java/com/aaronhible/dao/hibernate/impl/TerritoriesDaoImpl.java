@@ -4,12 +4,9 @@ package com.aaronhible.dao.hibernate.impl;
 
 import java.util.List;
 
-import javax.naming.InitialContext;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
 import com.aaronhible.dao.TerritoriesDao;
@@ -21,22 +18,9 @@ import com.aaronhible.model.Territories;
  * @see com.aaronhible.model.Territories
  * @author Hibernate Tools
  */
-public class TerritoriesDaoImpl implements TerritoriesDao {
+public class TerritoriesDaoImpl extends AbstractHibernateSessionFactoryDao implements TerritoriesDao {
 
 	private static final Log log = LogFactory.getLog(TerritoriesDaoImpl.class);
-
-	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -49,7 +33,7 @@ public class TerritoriesDaoImpl implements TerritoriesDao {
 	public void persist(Territories transientInstance) {
 		log.debug("persisting Territories instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			getSessionFactory().getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -68,7 +52,7 @@ public class TerritoriesDaoImpl implements TerritoriesDao {
 	public void attachDirty(Territories instance) {
 		log.debug("attaching dirty Territories instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			getSessionFactory().getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -87,7 +71,7 @@ public class TerritoriesDaoImpl implements TerritoriesDao {
 	public void attachClean(Territories instance) {
 		log.debug("attaching clean Territories instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			getSessionFactory().getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -106,7 +90,7 @@ public class TerritoriesDaoImpl implements TerritoriesDao {
 	public void delete(Territories persistentInstance) {
 		log.debug("deleting Territories instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			getSessionFactory().getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -125,7 +109,7 @@ public class TerritoriesDaoImpl implements TerritoriesDao {
 	public Territories merge(Territories detachedInstance) {
 		log.debug("merging Territories instance");
 		try {
-			Territories result = (Territories) sessionFactory
+			Territories result = (Territories) getSessionFactory()
 					.getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -146,7 +130,7 @@ public class TerritoriesDaoImpl implements TerritoriesDao {
 	public Territories findById(java.lang.String id) {
 		log.debug("getting Territories instance with id: " + id);
 		try {
-			Territories instance = (Territories) sessionFactory
+			Territories instance = (Territories) getSessionFactory()
 					.getCurrentSession().get(
 							"com.aaronhible.model.Territories", id);
 			if (instance == null) {
@@ -173,7 +157,7 @@ public class TerritoriesDaoImpl implements TerritoriesDao {
 	public List<Territories> findByExample(Territories instance) {
 		log.debug("finding Territories instance by example");
 		try {
-			List<Territories> results = sessionFactory.getCurrentSession()
+			List<Territories> results = getSessionFactory().getCurrentSession()
 					.createCriteria("com.aaronhible.model.Territories")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "

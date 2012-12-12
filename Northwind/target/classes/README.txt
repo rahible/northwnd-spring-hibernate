@@ -30,4 +30,7 @@ src/main/resources
 		->aaronhible
 			->model (hibernate hbm files)
 			
-* Found the generated hbm and java files have fields that don't exist in them???
+* Refactored Generated files to have Generic returns, serializable ids, hashcode, equals, tostring, and interfaces for the Daos
+* Removed all database view generated files, mappings, and configurations
+* Added a unit test for CategoriesDaoImpl - failed no jndi configured for SessionFactory
+* Configured a datasource for jndi for spring.

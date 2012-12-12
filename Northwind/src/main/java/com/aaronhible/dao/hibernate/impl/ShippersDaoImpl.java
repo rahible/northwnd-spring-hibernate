@@ -4,12 +4,9 @@ package com.aaronhible.dao.hibernate.impl;
 
 import java.util.List;
 
-import javax.naming.InitialContext;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
 import com.aaronhible.dao.ShippersDao;
@@ -21,22 +18,9 @@ import com.aaronhible.model.Shippers;
  * @see com.aaronhible.model.Shippers
  * @author Hibernate Tools
  */
-public class ShippersDaoImpl implements ShippersDao {
+public class ShippersDaoImpl extends AbstractHibernateSessionFactoryDao implements ShippersDao {
 
 	private static final Log log = LogFactory.getLog(ShippersDaoImpl.class);
-
-	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
 
 	/* (non-Javadoc)
 	 * @see com.aaronhible.dao.hibernate.impl.ShippersDao#persist(com.aaronhible.model.Shippers)
@@ -45,7 +29,7 @@ public class ShippersDaoImpl implements ShippersDao {
 	public void persist(Shippers transientInstance) {
 		log.debug("persisting Shippers instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			getSessionFactory().getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -60,7 +44,7 @@ public class ShippersDaoImpl implements ShippersDao {
 	public void attachDirty(Shippers instance) {
 		log.debug("attaching dirty Shippers instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			getSessionFactory().getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -75,7 +59,7 @@ public class ShippersDaoImpl implements ShippersDao {
 	public void attachClean(Shippers instance) {
 		log.debug("attaching clean Shippers instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			getSessionFactory().getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -90,7 +74,7 @@ public class ShippersDaoImpl implements ShippersDao {
 	public void delete(Shippers persistentInstance) {
 		log.debug("deleting Shippers instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			getSessionFactory().getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -105,7 +89,7 @@ public class ShippersDaoImpl implements ShippersDao {
 	public Shippers merge(Shippers detachedInstance) {
 		log.debug("merging Shippers instance");
 		try {
-			Shippers result = (Shippers) sessionFactory.getCurrentSession()
+			Shippers result = (Shippers) getSessionFactory().getCurrentSession()
 					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -122,7 +106,7 @@ public class ShippersDaoImpl implements ShippersDao {
 	public Shippers findById(int id) {
 		log.debug("getting Shippers instance with id: " + id);
 		try {
-			Shippers instance = (Shippers) sessionFactory.getCurrentSession()
+			Shippers instance = (Shippers) getSessionFactory().getCurrentSession()
 					.get("com.aaronhible.model.Shippers", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
@@ -144,7 +128,7 @@ public class ShippersDaoImpl implements ShippersDao {
 	public List<Shippers> findByExample(Shippers instance) {
 		log.debug("finding Shippers instance by example");
 		try {
-			List<Shippers> results = sessionFactory.getCurrentSession()
+			List<Shippers> results = getSessionFactory().getCurrentSession()
 					.createCriteria("com.aaronhible.model.Shippers")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "

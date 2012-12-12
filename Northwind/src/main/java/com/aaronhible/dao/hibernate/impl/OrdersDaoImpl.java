@@ -4,12 +4,9 @@ package com.aaronhible.dao.hibernate.impl;
 
 import java.util.List;
 
-import javax.naming.InitialContext;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
 import com.aaronhible.dao.OrdersDao;
@@ -21,22 +18,9 @@ import com.aaronhible.model.Orders;
  * @see com.aaronhible.model.Orders
  * @author Hibernate Tools
  */
-public class OrdersDaoImpl implements OrdersDao {
+public class OrdersDaoImpl extends AbstractHibernateSessionFactoryDao implements OrdersDao {
 
 	private static final Log log = LogFactory.getLog(OrdersDaoImpl.class);
-
-	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
 
 	/* (non-Javadoc)
 	 * @see com.aaronhible.dao.hibernate.impl.OrdersDao#persist(com.aaronhible.model.Orders)
@@ -45,7 +29,7 @@ public class OrdersDaoImpl implements OrdersDao {
 	public void persist(Orders transientInstance) {
 		log.debug("persisting Orders instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			getSessionFactory().getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -60,7 +44,7 @@ public class OrdersDaoImpl implements OrdersDao {
 	public void attachDirty(Orders instance) {
 		log.debug("attaching dirty Orders instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			getSessionFactory().getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -75,7 +59,7 @@ public class OrdersDaoImpl implements OrdersDao {
 	public void attachClean(Orders instance) {
 		log.debug("attaching clean Orders instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			getSessionFactory().getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -90,7 +74,7 @@ public class OrdersDaoImpl implements OrdersDao {
 	public void delete(Orders persistentInstance) {
 		log.debug("deleting Orders instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			getSessionFactory().getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -105,7 +89,7 @@ public class OrdersDaoImpl implements OrdersDao {
 	public Orders merge(Orders detachedInstance) {
 		log.debug("merging Orders instance");
 		try {
-			Orders result = (Orders) sessionFactory.getCurrentSession().merge(
+			Orders result = (Orders) getSessionFactory().getCurrentSession().merge(
 					detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -122,7 +106,7 @@ public class OrdersDaoImpl implements OrdersDao {
 	public Orders findById(int id) {
 		log.debug("getting Orders instance with id: " + id);
 		try {
-			Orders instance = (Orders) sessionFactory.getCurrentSession().get(
+			Orders instance = (Orders) getSessionFactory().getCurrentSession().get(
 					"com.aaronhible.model.Orders", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
@@ -144,7 +128,7 @@ public class OrdersDaoImpl implements OrdersDao {
 	public List<Orders> findByExample(Orders instance) {
 		log.debug("finding Orders instance by example");
 		try {
-			List<Orders> results = sessionFactory.getCurrentSession()
+			List<Orders> results = getSessionFactory().getCurrentSession()
 					.createCriteria("com.aaronhible.model.Orders")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "

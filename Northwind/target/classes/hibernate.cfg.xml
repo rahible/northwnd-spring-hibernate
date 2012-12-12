@@ -3,40 +3,24 @@
 "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
-        <property name="hibernate.connection.driver_class">net.sourceforge.jtds.jdbc.Driver</property>
-        <property name="hibernate.connection.password">AASSDDff11</property>
-        <property name="hibernate.connection.url">jdbc:jtds:sqlserver://localhost:1433;DatabaseName=NORTHWND</property>
-        <property name="hibernate.connection.username">sa</property>
-        <property name="hibernate.default_schema">dbo</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
-        <mapping resource="com/aaronhible/model/Employees.hbm.xml" />
-        <mapping resource="com/aaronhible/model/AlphabeticalListOfProducts.hbm.xml" />
-        <mapping resource="com/aaronhible/model/Region.hbm.xml" />
-        <mapping resource="com/aaronhible/model/Categories.hbm.xml" />
-        <mapping resource="com/aaronhible/model/ProductsByCategory.hbm.xml" />
-        <mapping resource="com/aaronhible/model/SummaryOfSalesByYear.hbm.xml" />
-        <mapping resource="com/aaronhible/model/CustomerAndSuppliersByCity.hbm.xml" />
-        <mapping resource="com/aaronhible/model/SummaryOfSalesByQuarter.hbm.xml" />
-        <mapping resource="com/aaronhible/model/SalesTotalsByAmount.hbm.xml" />
-        <mapping resource="com/aaronhible/model/Invoices.hbm.xml" />
-        <mapping resource="com/aaronhible/model/ProductsAboveAveragePrice.hbm.xml" />
-        <mapping resource="com/aaronhible/model/OrderDetails.hbm.xml" />
-        <mapping resource="com/aaronhible/model/Orders.hbm.xml" />
-        <mapping resource="com/aaronhible/model/OrderDetailsExtended.hbm.xml" />
-        <mapping resource="com/aaronhible/model/OrderSubtotals.hbm.xml" />
-        <mapping resource="com/aaronhible/model/Products.hbm.xml" />
-        <mapping resource="com/aaronhible/model/Sysdiagrams.hbm.xml" />
-        <mapping resource="com/aaronhible/model/ProductSalesFor1997.hbm.xml" />
-        <mapping resource="com/aaronhible/model/SalesByCategory.hbm.xml" />
-        <mapping resource="com/aaronhible/model/Shippers.hbm.xml" />
-        <mapping resource="com/aaronhible/model/Suppliers.hbm.xml" />
-        <mapping resource="com/aaronhible/model/Customers.hbm.xml" />
-        <mapping resource="com/aaronhible/model/CategorySalesFor1997.hbm.xml" />
-        <mapping resource="com/aaronhible/model/Territories.hbm.xml" />
-        <mapping resource="com/aaronhible/model/CurrentProductList.hbm.xml" />
-        <mapping resource="com/aaronhible/model/OrdersQry.hbm.xml" />
-        <mapping resource="com/aaronhible/model/QuarterlyOrders.hbm.xml" />
-        <mapping resource="com/aaronhible/model/CustomerDemographics.hbm.xml" />
-    </session-factory>
+	<session-factory>
+<!-- <property name="hibernate.connection.driver_class">net.sourceforge.jtds.jdbc.Driver</property>
+		<property name="hibernate.connection.password">AASSDDff11</property>
+		<property name="hibernate.connection.url">jdbc:jtds:sqlserver://localhost:1433;DatabaseName=NORTHWND</property>
+		<property name="hibernate.connection.username">sa</property>  -->		
+		<property name="hibernate.default_schema">dbo</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+		<mapping resource="com/aaronhible/model/Employees.hbm.xml" />
+		<mapping resource="com/aaronhible/model/Region.hbm.xml" />
+		<mapping resource="com/aaronhible/model/Categories.hbm.xml" />
+		<mapping resource="com/aaronhible/model/OrderDetails.hbm.xml" />
+		<mapping resource="com/aaronhible/model/Orders.hbm.xml" />
+		<mapping resource="com/aaronhible/model/Products.hbm.xml" />
+		<mapping resource="com/aaronhible/model/Sysdiagrams.hbm.xml" />
+		<mapping resource="com/aaronhible/model/Shippers.hbm.xml" />
+		<mapping resource="com/aaronhible/model/Suppliers.hbm.xml" />
+		<mapping resource="com/aaronhible/model/Customers.hbm.xml" />
+		<mapping resource="com/aaronhible/model/Territories.hbm.xml" />
+		<mapping resource="com/aaronhible/model/CustomerDemographics.hbm.xml" />
+	</session-factory>
 </hibernate-configuration>

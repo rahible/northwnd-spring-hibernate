@@ -4,12 +4,9 @@ package com.aaronhible.dao.hibernate.impl;
 
 import java.util.List;
 
-import javax.naming.InitialContext;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
 import com.aaronhible.dao.ProductsDao;
@@ -21,22 +18,9 @@ import com.aaronhible.model.Products;
  * @see com.aaronhible.model.Products
  * @author Hibernate Tools
  */
-public class ProductsDaoImpl implements ProductsDao {
+public class ProductsDaoImpl extends AbstractHibernateSessionFactoryDao implements ProductsDao {
 
 	private static final Log log = LogFactory.getLog(ProductsDaoImpl.class);
-
-	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
 
 	/* (non-Javadoc)
 	 * @see com.aaronhible.dao.hibernate.impl.ProductsDao#persist(com.aaronhible.model.Products)
@@ -45,7 +29,7 @@ public class ProductsDaoImpl implements ProductsDao {
 	public void persist(Products transientInstance) {
 		log.debug("persisting Products instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			getSessionFactory().getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -60,7 +44,7 @@ public class ProductsDaoImpl implements ProductsDao {
 	public void attachDirty(Products instance) {
 		log.debug("attaching dirty Products instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			getSessionFactory().getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -75,7 +59,7 @@ public class ProductsDaoImpl implements ProductsDao {
 	public void attachClean(Products instance) {
 		log.debug("attaching clean Products instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			getSessionFactory().getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -90,7 +74,7 @@ public class ProductsDaoImpl implements ProductsDao {
 	public void delete(Products persistentInstance) {
 		log.debug("deleting Products instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			getSessionFactory().getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -105,7 +89,7 @@ public class ProductsDaoImpl implements ProductsDao {
 	public Products merge(Products detachedInstance) {
 		log.debug("merging Products instance");
 		try {
-			Products result = (Products) sessionFactory.getCurrentSession()
+			Products result = (Products) getSessionFactory().getCurrentSession()
 					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -122,7 +106,7 @@ public class ProductsDaoImpl implements ProductsDao {
 	public Products findById(int id) {
 		log.debug("getting Products instance with id: " + id);
 		try {
-			Products instance = (Products) sessionFactory.getCurrentSession()
+			Products instance = (Products) getSessionFactory().getCurrentSession()
 					.get("com.aaronhible.model.Products", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
@@ -144,7 +128,7 @@ public class ProductsDaoImpl implements ProductsDao {
 	public List<Products> findByExample(Products instance) {
 		log.debug("finding Products instance by example");
 		try {
-			List<Products> results = sessionFactory.getCurrentSession()
+			List<Products> results = getSessionFactory().getCurrentSession()
 					.createCriteria("com.aaronhible.model.Products")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "

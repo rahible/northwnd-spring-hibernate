@@ -4,12 +4,9 @@ package com.aaronhible.dao.hibernate.impl;
 
 import java.util.List;
 
-import javax.naming.InitialContext;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
 import com.aaronhible.dao.EmployeesDao;
@@ -21,22 +18,9 @@ import com.aaronhible.model.Employees;
  * @see com.aaronhible.model.Employees
  * @author Hibernate Tools
  */
-public class EmployeesDaoImpl implements EmployeesDao {
+public class EmployeesDaoImpl extends AbstractHibernateSessionFactoryDao implements EmployeesDao {
 
 	private static final Log log = LogFactory.getLog(EmployeesDaoImpl.class);
-
-	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
 
 	/* (non-Javadoc)
 	 * @see com.aaronhible.dao.hibernate.impl.EmployeesDao#persist(com.aaronhible.model.Employees)
@@ -45,7 +29,7 @@ public class EmployeesDaoImpl implements EmployeesDao {
 	public void persist(Employees transientInstance) {
 		log.debug("persisting Employees instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			getSessionFactory().getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -60,7 +44,7 @@ public class EmployeesDaoImpl implements EmployeesDao {
 	public void attachDirty(Employees instance) {
 		log.debug("attaching dirty Employees instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			getSessionFactory().getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -75,7 +59,7 @@ public class EmployeesDaoImpl implements EmployeesDao {
 	public void attachClean(Employees instance) {
 		log.debug("attaching clean Employees instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			getSessionFactory().getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -90,7 +74,7 @@ public class EmployeesDaoImpl implements EmployeesDao {
 	public void delete(Employees persistentInstance) {
 		log.debug("deleting Employees instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			getSessionFactory().getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -105,7 +89,7 @@ public class EmployeesDaoImpl implements EmployeesDao {
 	public Employees merge(Employees detachedInstance) {
 		log.debug("merging Employees instance");
 		try {
-			Employees result = (Employees) sessionFactory.getCurrentSession()
+			Employees result = (Employees) getSessionFactory().getCurrentSession()
 					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -122,7 +106,7 @@ public class EmployeesDaoImpl implements EmployeesDao {
 	public Employees findById(int id) {
 		log.debug("getting Employees instance with id: " + id);
 		try {
-			Employees instance = (Employees) sessionFactory.getCurrentSession()
+			Employees instance = (Employees) getSessionFactory().getCurrentSession()
 					.get("com.aaronhible.model.Employees", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
@@ -144,7 +128,7 @@ public class EmployeesDaoImpl implements EmployeesDao {
 	public List<Employees> findByExample(Employees instance) {
 		log.debug("finding Employees instance by example");
 		try {
-			List<Employees> results = sessionFactory.getCurrentSession()
+			List<Employees> results = getSessionFactory().getCurrentSession()
 					.createCriteria("com.aaronhible.model.Employees")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
