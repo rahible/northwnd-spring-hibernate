@@ -91,7 +91,7 @@
     </logger>
     <!-- Limit the org.apache.commons logger to INFO as its FATAL is verbose -->
     <logger name="org.apache.commons">
-        <level value="ERROR" />
+        <level value="ERROR" />o
     </logger>
     <!-- Limit springs transaction stuff to INFO -->
     <logger name="org.springframework">
@@ -101,6 +101,10 @@
     <logger name="org.hibernate">
         <level value="ERROR" />
     </logger>
+    <logger name="org.hibernate.SQL">
+        <level value="DEBUG" />
+    </logger>
+    
     <!-- ======================= -->
     <!-- Setup the Root logger -->
     <!-- ======================= -->

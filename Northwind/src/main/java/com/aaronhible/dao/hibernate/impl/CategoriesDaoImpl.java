@@ -38,7 +38,7 @@ public class CategoriesDaoImpl extends AbstractHibernateSessionFactoryDao
 	public void persist(Categories transientInstance) {
 		log.debug("persisting Categories instance");
 		try {
-			getSessionFactory().getCurrentSession().persist(transientInstance);
+			getSessionFactory().getCurrentSession().save(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);

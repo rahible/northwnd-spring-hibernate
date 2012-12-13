@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.aaronhible.dao.CategoriesDao;
 import com.aaronhible.model.Categories;
@@ -28,6 +29,12 @@ public class CategoriesServiceImpl implements CategoriesService {
 
 	private CategoriesDao getCategoriesDao() {
 		return this.categoriesDao;
+	}
+
+	@Override
+	@Transactional	
+	public void save(Categories categories) {
+		this.getCategoriesDao().persist(categories);
 	}
 
 }
