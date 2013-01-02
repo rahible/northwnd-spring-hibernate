@@ -15,7 +15,7 @@
             <key>
                 <column name="RegionID" not-null="true" />
             </key>
-            <one-to-many class="com.aaronhible.model.Territories" />
+            <one-to-many class="com.aaronhible.model.Territory" />
         </set>
     </class>
 </hibernate-mapping>

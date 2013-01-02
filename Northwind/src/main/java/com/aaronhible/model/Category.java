@@ -18,7 +18,7 @@ public class Category implements java.io.Serializable {
 	private String name;
 	private String description;
 	private Blob picture;
-	private Set<Products> products = new HashSet<Products>(0);
+	private Set<Product> product = new HashSet<Product>(0);
 
 	public Category() {
 	}
@@ -29,12 +29,12 @@ public class Category implements java.io.Serializable {
 	}
 
 	public Category(int id, String name, String description,
-			Blob picture, Set<Products> products) {
+			Blob picture, Set<Product> product) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.picture = picture;
-		this.products = products;
+		this.product = product;
 	}
 
 	public int getId() {
@@ -76,12 +76,12 @@ public class Category implements java.io.Serializable {
 		this.picture = picBlob;
 	}
 
-	public Set<Products> getProducts() {
-		return this.products;
+	public Set<Product> getProducts() {
+		return this.product;
 	}
 
-	public void setProducts(Set<Products> products) {
-		this.products = products;
+	public void setProducts(Set<Product> product) {
+		this.product = product;
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public class Category implements java.io.Serializable {
 	public String toString() {
 		return "Category [id=" + id + ", name="
 				+ name + ", description=" + description + ", picture="
-				+ picture + ", products=" + products + "]";
+				+ picture + ", product=" + product + "]";
 	}
 	
 }

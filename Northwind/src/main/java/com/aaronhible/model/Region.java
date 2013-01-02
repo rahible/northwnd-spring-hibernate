@@ -16,7 +16,7 @@ public class Region implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private int regionId;
 	private String regionDescription;
-	private Set<Territories> territorieses = new HashSet<Territories>(0);
+	private Set<Territory> territorieses = new HashSet<Territory>(0);
 
 	public Region() {
 	}
@@ -27,7 +27,7 @@ public class Region implements java.io.Serializable {
 	}
 
 	public Region(int regionId, String regionDescription,
-			Set<Territories> territorieses) {
+			Set<Territory> territorieses) {
 		this.regionId = regionId;
 		this.regionDescription = regionDescription;
 		this.territorieses = territorieses;
@@ -49,11 +49,11 @@ public class Region implements java.io.Serializable {
 		this.regionDescription = regionDescription;
 	}
 
-	public Set<Territories> getTerritorieses() {
+	public Set<Territory> getTerritorieses() {
 		return this.territorieses;
 	}
 
-	public void setTerritorieses(Set<Territories> territorieses) {
+	public void setTerritorieses(Set<Territory> territorieses) {
 		this.territorieses = territorieses;
 	}
 

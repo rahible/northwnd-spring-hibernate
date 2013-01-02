@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 12, 2012 8:51:30 AM by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="com.aaronhible.model.Shipper" table="Shippers" catalog="NORTHWND">
+        <id name="id" type="int">
+            <column name="ShipperID" />
+            <generator class="assigned" />
+        </id>
+        <property name="companyName" type="string">
+            <column name="CompanyName" length="40" not-null="true" />
+        </property>
+        <property name="phone" type="string">
+            <column name="Phone" length="24" />
+        </property>
+        <set name="orders" inverse="true">
+            <key>
+                <column name="ShipVia" />
+            </key>
+            <one-to-many class="com.aaronhible.model.Order" />
+        </set>
+    </class>
+</hibernate-mapping>

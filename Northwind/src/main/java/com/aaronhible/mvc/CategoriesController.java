@@ -21,15 +21,27 @@ import com.aaronhible.service.CategoryService;
 public class CategoriesController {
 	@Autowired
 	private CategoryService categoryService;
-
+	
+	/**
+	 * Returns all Categories
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/categories", method = RequestMethod.GET)
 	public String all(Model model) {
 		model.addAttribute("categories", getCategoriesService().findAll());
 		return "categories";
 	}
 
+	/**
+	 * Returns the Picture as a image.gif from the database.
+	 * @param response
+	 * @param id
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/categories/images/{id}/image.gif", method = RequestMethod.GET)
-	public void image(final HttpServletResponse response, @PathVariable("id") int id) throws IOException {
+	public void image(final HttpServletResponse response,
+			@PathVariable("id") int id) throws IOException {
 		byte[] image = this.getCategoriesService().findPicture(id);
 		int length = image.length;
 		String contentType = "image/gif";
@@ -40,31 +52,49 @@ public class CategoriesController {
 		out.flush();
 	}
 
+	/**
+	 * Returns a specified category based on the id, and forwards to the update page.
+	 * @param id
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/categories/{id}", method = RequestMethod.GET)
-	public String read(@PathVariable("id") int id, Model model) throws IOException {
+	public String read(@PathVariable("id") int id, Model model)
+			throws IOException {
 		Category category = this.getCategoriesService().findById(id);
 		model.addAttribute("category", category);
 		return "categoriesUpdate";
 	}
-	
-	
+
+	/**
+	 * The update is a post since put does not work with a multipart request.  Maybe look
+	 * at changing the file update to be separate from the other items updates.  
+	 * 
+	 * @param upload
+	 * @param id
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/categories/{id}", method = RequestMethod.POST)
-	public String update(@RequestParam("picture") MultipartFile upload, 
+	public String update(@RequestParam("picture") MultipartFile upload,
 			@PathVariable("id") int id) throws IOException {
 		Category category = this.getCategoriesService().findById(id);
-		category.setPicture(upload.getBytes());
+		if (!upload.isEmpty()) {
+			category.setPicture(upload.getBytes());
+		}
 		this.getCategoriesService().save(category);
 		return "categories";
 	}
-	
-//	@RequestMapping(value = "/categories", method = RequestMethod.POST)
-//	public String create(@RequestParam("picture") MultipartFile upload, 
-//			@RequestParam(value="id", required=true)  int id) throws IOException {
-//		Category category = this.getCategoriesService().findById(id);
-//		category.setPicture(upload.getBytes());
-//		this.getCategoriesService().save(category);
-//		return "categories";
-//	}
+
+	// @RequestMapping(value = "/categories", method = RequestMethod.POST)
+	// public String create(@RequestParam("picture") MultipartFile upload,
+	// @RequestParam(value="id", required=true) int id) throws IOException {
+	// Category category = this.getCategoriesService().findById(id);
+	// category.setPicture(upload.getBytes());
+	// this.getCategoriesService().save(category);
+	// return "categories";
+	// }
 
 	public CategoryService getCategoriesService() {
 		return categoryService;

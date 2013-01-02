@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 12, 2012 8:51:30 AM by Hibernate Tools 3.2.2.GA -->
+<hibernate-mapping>
+    <class name="com.aaronhible.model.Supplier" table="Suppliers" catalog="NORTHWND">
+        <id name="id" type="int">
+            <column name="SupplierID" />
+            <generator class="assigned" />
+        </id>
+        <property name="companyName" type="string">
+            <column name="CompanyName" length="40" not-null="true" />
+        </property>
+        <property name="contactName" type="string">
+            <column name="ContactName" length="30" />
+        </property>
+        <property name="contactTitle" type="string">
+            <column name="ContactTitle" length="30" />
+        </property>
+        <property name="address" type="string">
+            <column name="Address" length="60" />
+        </property>
+        <property name="city" type="string">
+            <column name="City" length="15" />
+        </property>
+        <property name="region" type="string">
+            <column name="Region" length="15" />
+        </property>
+        <property name="postalCode" type="string">
+            <column name="PostalCode" length="10" />
+        </property>
+        <property name="country" type="string">
+            <column name="Country" length="15" />
+        </property>
+        <property name="phone" type="string">
+            <column name="Phone" length="24" />
+        </property>
+        <property name="fax" type="string">
+            <column name="Fax" length="24" />
+        </property>
+        <property name="homePage" type="string">
+            <column name="HomePage" />
+        </property>
+        <set name="products" inverse="true">
+            <key>
+                <column name="SupplierID" />
+            </key>
+            <one-to-many class="com.aaronhible.model.Product" />
+        </set>
+    </class>
+</hibernate-mapping>

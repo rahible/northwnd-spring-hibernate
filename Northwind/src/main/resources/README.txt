@@ -33,4 +33,6 @@ src/main/resources
 * Refactored Generated files to have Generic returns, serializable ids, hashcode, equals, tostring, and interfaces for the Daos
 * Removed all database view generated files, mappings, and configurations
 * Added a unit test for CategoriesDaoImpl - failed no jndi configured for SessionFactory
-* Configured a datasource for jndi for spring.
+* Configured a datasource and moved away from the jndi
+* Refactored out the plural model names to singular instances
+

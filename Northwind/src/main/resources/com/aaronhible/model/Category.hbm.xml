@@ -21,7 +21,7 @@
             <key>
                 <column name="CategoryID" />
             </key>
-            <one-to-many class="com.aaronhible.model.Products" />
+            <one-to-many class="com.aaronhible.model.Product" />
         </set>
     </class>
 </hibernate-mapping>

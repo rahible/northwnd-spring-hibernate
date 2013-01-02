@@ -6,17 +6,16 @@
 	<session-factory>
 		<property name="hibernate.default_schema">dbo</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
-		<mapping resource="com/aaronhible/model/Employees.hbm.xml" />
+		<mapping resource="com/aaronhible/model/Employee.hbm.xml" />
 		<mapping resource="com/aaronhible/model/Region.hbm.xml" />
 		<mapping resource="com/aaronhible/model/Category.hbm.xml" />
 		<mapping resource="com/aaronhible/model/OrderDetails.hbm.xml" />
-		<mapping resource="com/aaronhible/model/Orders.hbm.xml" />
-		<mapping resource="com/aaronhible/model/Products.hbm.xml" />
-		<mapping resource="com/aaronhible/model/Sysdiagrams.hbm.xml" />
-		<mapping resource="com/aaronhible/model/Shippers.hbm.xml" />
-		<mapping resource="com/aaronhible/model/Suppliers.hbm.xml" />
-		<mapping resource="com/aaronhible/model/Customers.hbm.xml" />
-		<mapping resource="com/aaronhible/model/Territories.hbm.xml" />
-		<mapping resource="com/aaronhible/model/CustomerDemographics.hbm.xml" />
+		<mapping resource="com/aaronhible/model/Order.hbm.xml" />
+		<mapping resource="com/aaronhible/model/Product.hbm.xml" />
+		<mapping resource="com/aaronhible/model/Shipper.hbm.xml" />
+		<mapping resource="com/aaronhible/model/Supplier.hbm.xml" />
+		<mapping resource="com/aaronhible/model/Customer.hbm.xml" />
+		<mapping resource="com/aaronhible/model/Territory.hbm.xml" />
+		<mapping resource="com/aaronhible/model/CustomerDemographic.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>
