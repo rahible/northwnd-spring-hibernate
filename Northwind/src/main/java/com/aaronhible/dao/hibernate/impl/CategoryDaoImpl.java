@@ -12,20 +12,20 @@ import org.hibernate.LockMode;
 import org.hibernate.criterion.Example;
 import org.springframework.stereotype.Repository;
 
-import com.aaronhible.dao.CategoriesDao;
-import com.aaronhible.model.Categories;
+import com.aaronhible.dao.CategoryDao;
+import com.aaronhible.model.Category;
 
 /**
- * Home object for domain model class Categories.
+ * Home object for domain model class Category.
  * 
- * @see com.aaronhible.model.Categories
+ * @see com.aaronhible.model.Category
  * @author Hibernate Tools
  */
-@Repository(value = "categoriesDao")
-public class CategoriesDaoImpl extends AbstractHibernateSessionFactoryDao
-		implements CategoriesDao {
+@Repository(value = "categoryDao")
+public class CategoryDaoImpl extends AbstractHibernateSessionFactoryDao
+		implements CategoryDao {
 
-	private static final Log log = LogFactory.getLog(CategoriesDaoImpl.class);
+	private static final Log log = LogFactory.getLog(CategoryDaoImpl.class);
 
 	/*
 	 * (non-Javadoc)
@@ -35,8 +35,8 @@ public class CategoriesDaoImpl extends AbstractHibernateSessionFactoryDao
 	 * .model.Categories)
 	 */
 	@Override
-	public void persist(Categories transientInstance) {
-		log.debug("persisting Categories instance");
+	public void persist(Category transientInstance) {
+		log.debug("persisting Category instance");
 		try {
 			getSessionFactory().getCurrentSession().save(transientInstance);
 			log.debug("persist successful");
@@ -54,8 +54,8 @@ public class CategoriesDaoImpl extends AbstractHibernateSessionFactoryDao
 	 * .model.Categories)
 	 */
 	@Override
-	public void attachDirty(Categories instance) {
-		log.debug("attaching dirty Categories instance");
+	public void attachDirty(Category instance) {
+		log.debug("attaching dirty Category instance");
 		try {
 			getSessionFactory().getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -73,8 +73,8 @@ public class CategoriesDaoImpl extends AbstractHibernateSessionFactoryDao
 	 * .model.Categories)
 	 */
 	@Override
-	public void attachClean(Categories instance) {
-		log.debug("attaching clean Categories instance");
+	public void attachClean(Category instance) {
+		log.debug("attaching clean Category instance");
 		try {
 			getSessionFactory().getCurrentSession().lock(instance,
 					LockMode.NONE);
@@ -93,8 +93,8 @@ public class CategoriesDaoImpl extends AbstractHibernateSessionFactoryDao
 	 * .model.Categories)
 	 */
 	@Override
-	public void delete(Categories persistentInstance) {
-		log.debug("deleting Categories instance");
+	public void delete(Category persistentInstance) {
+		log.debug("deleting Category instance");
 		try {
 			getSessionFactory().getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -109,13 +109,13 @@ public class CategoriesDaoImpl extends AbstractHibernateSessionFactoryDao
 	 * 
 	 * @see
 	 * com.aaronhible.dao.hibernate.impl.CategoriesDao#merge(com.aaronhible.
-	 * model.Categories)
+	 * model.Category)
 	 */
 	@Override
-	public Categories merge(Categories detachedInstance) {
-		log.debug("merging Categories instance");
+	public Category merge(Category detachedInstance) {
+		log.debug("merging Category instance");
 		try {
-			Categories result = (Categories) getSessionFactory()
+			Category result = (Category) getSessionFactory()
 					.getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -131,11 +131,11 @@ public class CategoriesDaoImpl extends AbstractHibernateSessionFactoryDao
 	 * @see com.aaronhible.dao.hibernate.impl.CategoriesDao#findById(int)
 	 */
 	@Override
-	public Categories findById(int id) {
-		log.debug("getting Categories instance with id: " + id);
+	public Category findById(int id) {
+		log.debug("getting Category instance with id: " + id);
 		try {
-			Categories instance = (Categories) getSessionFactory()
-					.getCurrentSession().get("com.aaronhible.model.Categories",
+			Category instance = (Category) getSessionFactory()
+					.getCurrentSession().get("com.aaronhible.model.Category",
 							id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
@@ -158,11 +158,11 @@ public class CategoriesDaoImpl extends AbstractHibernateSessionFactoryDao
 	 */
 	@Override
 	@SuppressWarnings(value = "unchecked")
-	public List<Categories> findByExample(Categories instance) {
-		log.debug("finding Categories instance by example");
+	public List<Category> findByExample(Category instance) {
+		log.debug("finding Category instance by example");
 		try {
-			List<Categories> results = getSessionFactory().getCurrentSession()
-					.createCriteria("com.aaronhible.model.Categories")
+			List<Category> results = getSessionFactory().getCurrentSession()
+					.createCriteria("com.aaronhible.model.Category")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -175,11 +175,11 @@ public class CategoriesDaoImpl extends AbstractHibernateSessionFactoryDao
 
 	@Override
 	@SuppressWarnings(value = "unchecked")
-	public List<Categories> findAll() {
-		log.debug("finding all Categories");
+	public List<Category> findAll() {
+		log.debug("finding all Category");
 		try {
-			List<Categories> results = getSessionFactory().getCurrentSession()
-					.createCriteria("com.aaronhible.model.Categories").list();
+			List<Category> results = getSessionFactory().getCurrentSession()
+					.createCriteria("com.aaronhible.model.Category").list();
 			log.debug("find all successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
@@ -190,7 +190,7 @@ public class CategoriesDaoImpl extends AbstractHibernateSessionFactoryDao
 	}
 
 	public byte[] findPicture(int id) {
-		Categories category = this.findById(id);
+		Category category = this.findById(id);
 		if (category == null)
 			return null;
 		try {

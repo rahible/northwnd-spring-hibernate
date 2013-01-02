@@ -17,10 +17,10 @@
 		<div id="header">All Categories</div>
 		<c:forEach items="${categories}" var="category" >
 			<div id="item">
-				<a href='show?categoryId=<c:out value="${category.categoryId}" />'>
-				<span id="name"><c:out value="${category.categoryName}" /></span>
+				<a href='categories/<c:out value="${category.id}" />'>
+				<span id="name"><c:out value="${category.name}" /></span>
 				<span id="description"><c:out value="${category.description}" /></span>
-				<span id="image"><img alt="<c:out value="${category.categoryName}" />" src='images/<c:out value="${category.categoryId}" />/image.gif'/></span>
+				<span id="image"><img alt="<c:out value="${category.name}" />" src='categories/images/<c:out value="${category.id}" />/image.gif'/></span>
 				</a>
 			</div>
 		</c:forEach>

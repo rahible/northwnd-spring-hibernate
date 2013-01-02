@@ -91,7 +91,7 @@
     </logger>
     <!-- Limit the org.apache.commons logger to INFO as its FATAL is verbose -->
     <logger name="org.apache.commons">
-        <level value="ERROR" />o
+        <level value="ERROR" />
     </logger>
     <!-- Limit springs transaction stuff to INFO -->
     <logger name="org.springframework">

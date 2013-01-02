@@ -4,15 +4,11 @@
 "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-<!-- <property name="hibernate.connection.driver_class">net.sourceforge.jtds.jdbc.Driver</property>
-		<property name="hibernate.connection.password">AASSDDff11</property>
-		<property name="hibernate.connection.url">jdbc:jtds:sqlserver://localhost:1433;DatabaseName=NORTHWND</property>
-		<property name="hibernate.connection.username">sa</property>  -->		
 		<property name="hibernate.default_schema">dbo</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
 		<mapping resource="com/aaronhible/model/Employees.hbm.xml" />
 		<mapping resource="com/aaronhible/model/Region.hbm.xml" />
-		<mapping resource="com/aaronhible/model/Categories.hbm.xml" />
+		<mapping resource="com/aaronhible/model/Category.hbm.xml" />
 		<mapping resource="com/aaronhible/model/OrderDetails.hbm.xml" />
 		<mapping resource="com/aaronhible/model/Orders.hbm.xml" />
 		<mapping resource="com/aaronhible/model/Products.hbm.xml" />

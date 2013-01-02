@@ -14,7 +14,7 @@ public class Products implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int productId;
-	private Categories categories;
+	private Category category;
 	private Suppliers suppliers;
 	private String productName;
 	private String quantityPerUnit;
@@ -33,12 +33,12 @@ public class Products implements java.io.Serializable {
 		this.discontinued = discontinued;
 	}
 
-	public Products(int productId, Categories categories, Suppliers suppliers,
+	public Products(int productId, Category category, Suppliers suppliers,
 			String productName, String quantityPerUnit, BigDecimal unitPrice,
 			Short unitsInStock, Short unitsOnOrder, Short reorderLevel,
 			boolean discontinued) {
 		this.productId = productId;
-		this.categories = categories;
+		this.category = category;
 		this.suppliers = suppliers;
 		this.productName = productName;
 		this.quantityPerUnit = quantityPerUnit;
@@ -57,12 +57,12 @@ public class Products implements java.io.Serializable {
 		this.productId = productId;
 	}
 
-	public Categories getCategories() {
-		return this.categories;
+	public Category getCategories() {
+		return this.category;
 	}
 
-	public void setCategories(Categories categories) {
-		this.categories = categories;
+	public void setCategories(Category category) {
+		this.category = category;
 	}
 
 	public Suppliers getSuppliers() {
@@ -153,8 +153,8 @@ public class Products implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Products [productId=" + productId + ", categories="
-				+ categories + ", suppliers=" + suppliers + ", productName="
+		return "Products [productId=" + productId + ", category="
+				+ category + ", suppliers=" + suppliers + ", productName="
 				+ productName + ", quantityPerUnit=" + quantityPerUnit
 				+ ", unitPrice=" + unitPrice + ", unitsInStock=" + unitsInStock
 				+ ", unitsOnOrder=" + unitsOnOrder + ", reorderLevel="

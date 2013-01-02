@@ -10,15 +10,5 @@
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
 		<property name="dataSource" ref="dataSource" />
-		<!--  <property 
-			name=" mappingResources "> <list> <value>com/aaronhible/model/Employees.hbm.xml</value> 
-			<value>com/aaronhible/model/Region.hbm.xml</value> <value>com/aaronhible/model/Categories.hbm.xml</value> 
-			<value>com/aaronhible/model/OrderDetails.hbm.xml</value> <value>com/aaronhible/model/Orders.hbm.xml</value> 
-			<value>com/aaronhible/model/Products.hbm.xml</value> <value>com/aaronhible/model/Sysdiagrams.hbm.xml</value> 
-			<value>com/aaronhible/model/Shippers.hbm.xml</value> <value>com/aaronhible/model/Suppliers.hbm.xml</value> 
-			<value>com/aaronhible/model/Customers.hbm.xml</value> <value>com/aaronhible/model/Territories.hbm.xml</value> 
-			<value>com/aaronhible/model/CustomerDemographics.hbm.xml</value> </list> 
-			</property> <property name="hibernateProperties"> <value>${hibernate.dialect}</value> 
-			</property> -->
 	</bean>
 </beans>

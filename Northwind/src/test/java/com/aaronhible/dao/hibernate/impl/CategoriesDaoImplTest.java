@@ -9,8 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aaronhible.dao.CategoriesDao;
-import com.aaronhible.model.Categories;
+import com.aaronhible.dao.CategoryDao;
+import com.aaronhible.model.Category;
 import com.aaronhible.util.AbstractContextConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -18,12 +18,12 @@ import com.aaronhible.util.AbstractContextConfiguration;
 public class CategoriesDaoImplTest extends AbstractContextConfiguration {
 
 	@Autowired
-	CategoriesDao categoriesDao;
+	CategoryDao categoryDao;
 
 	@Test
 	@Transactional
 	public void testFindById() {
-		Categories cat = categoriesDao.findById(1);
+		Category cat = categoryDao.findById(1);
 		assertNotNull(cat);
 	}
 }

@@ -5,7 +5,7 @@
 <html>
   <head>
   
-    <title>Update Categories</title>
+    <title>Update category</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -18,9 +18,10 @@
   </head>
   
   <body>
-    Update Categories
-    <form name="category" method="post" action="update" enctype="multipart/form-data">
-    	<input id="categoryId" name="categoryId" type="hidden" value="<c:out value='${categories.categoryId}' />"/>
+    Update category
+    <form name="category" method="post" action="<c:out value='${category.id}' />" enctype="multipart/form-data">
+		<div>Name:<input type="text" name="name" value="<c:out value='${category.name}' />" /></div>
+		<div>Description:<input type="text" name="description" value="<c:out value='${category.description}' />" /></div>
     	<div>File:&nbsp;<input type="file" name="picture" /></div> 
     	<input id="submit" type="submit" />
     </form>

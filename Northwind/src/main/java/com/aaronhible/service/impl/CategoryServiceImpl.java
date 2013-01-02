@@ -6,20 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aaronhible.dao.CategoriesDao;
-import com.aaronhible.model.Categories;
-import com.aaronhible.service.CategoriesService;
+import com.aaronhible.dao.CategoryDao;
+import com.aaronhible.model.Category;
+import com.aaronhible.service.CategoryService;
 
 @Service
-public class CategoriesServiceImpl implements CategoriesService {
+public class CategoryServiceImpl implements CategoryService {
 	@Autowired
-	private CategoriesDao categoriesDao;
-	public List<Categories> findAll() {
+	private CategoryDao categoryDao;
+	public List<Category> findAll() {
 		return getCategoriesDao().findAll();
 	}
 	
 	@Override
-	public Categories findById(int id) {
+	public Category findById(int id) {
 		return getCategoriesDao().findById(id);
 	}
 	
@@ -27,14 +27,14 @@ public class CategoriesServiceImpl implements CategoriesService {
 		return getCategoriesDao().findPicture(id);
 	}
 
-	private CategoriesDao getCategoriesDao() {
-		return this.categoriesDao;
+	private CategoryDao getCategoriesDao() {
+		return this.categoryDao;
 	}
 
 	@Override
 	@Transactional	
-	public void save(Categories categories) {
-		this.getCategoriesDao().persist(categories);
+	public void save(Category category) {
+		this.getCategoriesDao().persist(category);
 	}
 
 }

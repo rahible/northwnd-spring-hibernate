@@ -14,22 +14,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.aaronhible.model.Categories;
-import com.aaronhible.service.CategoriesService;
+import com.aaronhible.model.Category;
+import com.aaronhible.service.CategoryService;
 
 @Controller
 public class CategoriesController {
 	@Autowired
-	private CategoriesService categoriesService;
+	private CategoryService categoryService;
 
-	@RequestMapping(value = "/categories/all", method = RequestMethod.GET)
-	public String allCategories(Model model) {
+	@RequestMapping(value = "/categories", method = RequestMethod.GET)
+	public String all(Model model) {
 		model.addAttribute("categories", getCategoriesService().findAll());
 		return "categories";
 	}
 
-	@RequestMapping(value = "/categories/images/{categoryId}/image.gif", method = RequestMethod.GET)
-	public void image(final HttpServletResponse response, @PathVariable("categoryId") int id) throws IOException {
+	@RequestMapping(value = "/categories/images/{id}/image.gif", method = RequestMethod.GET)
+	public void image(final HttpServletResponse response, @PathVariable("id") int id) throws IOException {
 		byte[] image = this.getCategoriesService().findPicture(id);
 		int length = image.length;
 		String contentType = "image/gif";
@@ -40,25 +40,34 @@ public class CategoriesController {
 		out.flush();
 	}
 
-	@RequestMapping(value = "/categories/show", method = RequestMethod.GET)
-	public String show(@RequestParam(value="categoryId", required=true)  int id, Model model) throws IOException {
-		Categories categories = this.getCategoriesService().findById(id);
-		model.addAttribute("categories", categories);
+	@RequestMapping(value = "/categories/{id}", method = RequestMethod.GET)
+	public String read(@PathVariable("id") int id, Model model) throws IOException {
+		Category category = this.getCategoriesService().findById(id);
+		model.addAttribute("category", category);
 		return "categoriesUpdate";
 	}
 	
 	
-	@RequestMapping(value = "/categories/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/categories/{id}", method = RequestMethod.POST)
 	public String update(@RequestParam("picture") MultipartFile upload, 
-			@RequestParam(value="categoryId", required=true)  int id) throws IOException {
-		Categories categories = this.getCategoriesService().findById(id);
-		categories.setPicture(upload.getBytes());
-		this.getCategoriesService().save(categories);
+			@PathVariable("id") int id) throws IOException {
+		Category category = this.getCategoriesService().findById(id);
+		category.setPicture(upload.getBytes());
+		this.getCategoriesService().save(category);
 		return "categories";
 	}
 	
-	public CategoriesService getCategoriesService() {
-		return categoriesService;
+//	@RequestMapping(value = "/categories", method = RequestMethod.POST)
+//	public String create(@RequestParam("picture") MultipartFile upload, 
+//			@RequestParam(value="id", required=true)  int id) throws IOException {
+//		Category category = this.getCategoriesService().findById(id);
+//		category.setPicture(upload.getBytes());
+//		this.getCategoriesService().save(category);
+//		return "categories";
+//	}
+
+	public CategoryService getCategoriesService() {
+		return categoryService;
 	}
 
 }

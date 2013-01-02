@@ -3,12 +3,12 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated Dec 12, 2012 8:51:30 AM by Hibernate Tools 3.2.2.GA -->
 <hibernate-mapping>
-    <class name="com.aaronhible.model.Categories" table="Categories" catalog="NORTHWND">
-        <id name="categoryId" type="int">
+    <class name="com.aaronhible.model.Category" table="Categories" catalog="NORTHWND">
+        <id name="id" type="int">
             <column name="CategoryID" />
             <generator class="assigned" />
         </id>
-        <property name="categoryName" type="string">
+        <property name="name" type="string">
             <column name="CategoryName" length="15" not-null="true" />
         </property>
         <property name="description" type="string">
@@ -17,7 +17,7 @@
         <property name="picture" type="blob">
             <column name="Picture" />
         </property>
-        <set name="productses" inverse="true">
+        <set name="products" inverse="true">
             <key>
                 <column name="CategoryID" />
             </key>
