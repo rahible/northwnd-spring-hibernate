@@ -84,7 +84,7 @@ public class CategoriesController {
 			category.setPicture(upload.getBytes());
 		}
 		this.getCategoriesService().save(category);
-		return "categories";
+		return "redirect:"+id;
 	}
 
 	// @RequestMapping(value = "/categories", method = RequestMethod.POST)
