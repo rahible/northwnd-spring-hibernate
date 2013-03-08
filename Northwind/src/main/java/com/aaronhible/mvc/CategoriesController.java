@@ -1,17 +1,18 @@
 package com.aaronhible.mvc;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.aaronhible.model.Category;
@@ -28,9 +29,9 @@ public class CategoriesController {
 	 * @return
 	 */
 	@RequestMapping(value = "/categories", method = RequestMethod.GET)
-	public String all(Model model) {
-		model.addAttribute("categories", getCategoriesService().findAll());
-		return "categories";
+	public @ResponseBody List<com.aaronhible.dto.Category> all() {
+		return getCategoriesService().findAll();
+//		return "categories";
 	}
 
 	/**
@@ -60,11 +61,11 @@ public class CategoriesController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/categories/{id}", method = RequestMethod.GET)
-	public String read(@PathVariable("id") int id, Model model)
+	public @ResponseBody Category read(@PathVariable("id") int id)
 			throws IOException {
-		Category category = this.getCategoriesService().findById(id);
-		model.addAttribute("category", category);
-		return "categoriesUpdate";
+		return this.getCategoriesService().findById(id);
+//		model.addAttribute("category", category);
+//		return "categoriesUpdate";
 	}
 
 	/**
@@ -87,6 +88,15 @@ public class CategoriesController {
 		return "redirect:"+id;
 	}
 
+	/*
+	 * 
+	 * public @ResponseBody MyObject getMyOjbect() {
+	 * 		return myObject;
+	 * } 
+	 * 
+	 * 
+	 */
+	
 	// @RequestMapping(value = "/categories", method = RequestMethod.POST)
 	// public String create(@RequestParam("picture") MultipartFile upload,
 	// @RequestParam(value="id", required=true) int id) throws IOException {
